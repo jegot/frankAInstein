@@ -10,4 +10,4 @@ The generated image would likely be a cat with red fur (or something similar)
 **Audience is intended to be children learning about how AI models train.
 
 Model used:
-Let's use a model that is already pre-trained in image generation or build a super simple encoder
+The model will be a simple VAE. Pretrained, though not fully, on the entire dataset
