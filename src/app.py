@@ -9,6 +9,34 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from src.model import load_models
 from src.generate import preprocess_image, encode_image, add_noise_to_image, generate_style_transfer
 
+
+'''
+GUI GOES HERE
+USER SHOULD BE ABLE TO:
+- UPLOAD THEIR OWN IMAGE (FOR DEMO LETS USE A PICTURE OF ROCKY. PROFESSORS LOVE STUFF LIKE THAT)
+- THE CODE BELOW WORKS FOR FILE INPUT BUT IF IT COULD LOOK MORE VISUALLY APPEALING OR BE WRAPPED WITHIN A GUI, THATD BE GOOD
+- CHOOSE A STYLE FROM A PREDEFINED STYLE LIST: THINK ANIME, CARTOON, VAN GOGH...ETC. 
+- SAVE THE CHOSEN STYLE AS THE 'PROMPT'
+
+- IF POSSIBLE, ADD A FRAME IN THE GUI FOR IMAGES. TRY AND WRITE THIS AS A WHILE LOOP SO THE KIDS JUST SEE SOME IMAGES WHILE THE ACTUAL PROCESS IS RUNNING
+
+- I'M GOING TO WORK ON SOME PICTURES TO 'VISUALIZE' THE PROCESS. HERE'S THE STORY PITCH FOR AN ANALOGY OF THE PROCESS :
+    - Characters: Scientist (User), Robot (VAE), Artist (Diffuser).
+    - Analogies: Machine (Encoder and Decoder), Door (bottleneck and latent space)
+    1. The scientist gets a picture he wants to change the style of. He tries to run straight to the artist, but his picture is too big to fit through the door.
+    2. Above the door is a sign that says 'latent-space only'
+    3. A robot sitting off to the side taps on a machine. The scientist hands the picture to the robot who runs it through the machine.
+    4. Out of the machine comes small, blurry version of the picture. The robot hands this to the scientist who can now fit through the door into 'latent space'.
+    5. Into the latent space, the scientist meets an artist who takes the new condensed picture. He slowly starts spraying it with spray paint until it is just noise.
+    6. The artist turns to the scientist and asks him to select a style from the 'style wall'. 
+    7. The scientist chooses his style, and the artist begins removing noise with a paint brush.
+    8. Finally, a new picture is created. It is still blurry and small like the other one.
+    9. The scientist goes back through the door to the robot, who switches the setting on the machine from 'encode' to 'decode'
+    10. The picture goes through the machine in the opposite direct now, and out pops the new picture in the scientist's preferred style.
+
+    
+'''
+
 def main():
     """Main application function"""
     print("Please upload your image")
