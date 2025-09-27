@@ -1,0 +1,9 @@
+torch
+torchvision
+diffusers
+accelerate
+transformers
+Pillow
+numpy
+scikit-learn
+matplotlib
