@@ -33,6 +33,7 @@ def encode_image(vae, x, device):
     
     return reconstructed_image, latent
 
+
 def add_noise_to_image(image):
     """Convert to numpy and add noise"""
     img_array = np.array(image, dtype=np.float32) / 255.0
@@ -51,7 +52,7 @@ def generate_style_transfer(pipe, image, prompt, device):
         num_inference_steps=25  # if we make this a variable we could somehow visualize this in correlational with how many noise 'iterations' it goes through
     ).images[0]
     
-    # BEFORE WE SHOW THIS TO THE USER, WE NEED TO SHOW ANOTHER LATENT TRANSFORMATION. THE IMAGE PRIOR TO THE FINAL 'DECODED ONE'.
+    
     result.save("final_generation.png")
     
     return result
