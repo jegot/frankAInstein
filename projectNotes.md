@@ -12,10 +12,6 @@ Model used:
   - runwayml/stable-diffusion-v1-5 (diffusion and primary generation)
   - CompVis/stable-diffusion-v1-4 (VAE and reconstructing latent space images)
 
-<<<<<<< HEAD
-Model used:
-The model will be a simple VAE. Pretrained, though not fully, on the entire dataset
-=======
 Kid-friendly story analogy:
   - Characters: Scientist (User), Robot (VAE), Artist (Diffuser).
   - Analogies: Machine (Encoder and Decoder), Door (bottleneck and latent space)
@@ -30,4 +26,3 @@ Kid-friendly story analogy:
     8. Finally, a new picture is created. It is still blurry and small like the other one.
     9. The scientist goes back through the door to the robot, who switches the setting on the machine from 'encode' to 'decode'
     10. The picture goes through the machine in the opposite direct now, and out pops the new picture in the scientist's preferred style.
->>>>>>> c9998400b77e380ece2b06485077770598b7dc58
