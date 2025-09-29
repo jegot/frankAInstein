@@ -42,14 +42,17 @@ def add_noise_to_image(image):
     noisy_img = Image.fromarray((noisy_array * 255).astype(np.uint8))
     return noisy_img
 
-def generate_style_transfer(pipe, image, prompt, device):
+def generate_style_transfer(pipe, image, prompt, device, strength=0.5, guidance_scale=5, num_inference_steps=25):
     """Generate style transfer using the diffusion pipeline"""
     result = pipe(
         prompt=prompt,
         image=image,
-        strength=0.5,
-        guidance_scale=5,
-        num_inference_steps=25  # if we make this a variable we could somehow visualize this in correlational with how many noise 'iterations' it goes through
+        strength=strength,
+        guidance_scale=guidance_scale,
+        num_inference_steps=num_inference_steps,
+        generator=torch.Generator(device=device).manual_seed(42),  # For reproducibility
+        eta=0.0,  # DDIM eta parameter
+        output_type="pil"  # Ensure PIL output
     ).images[0]
     
     
