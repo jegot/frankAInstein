@@ -72,7 +72,7 @@ def main():
     # BEFORE WE SHOW THIS TO THE USER, WE NEED TO SHOW ANOTHER LATENT TRANSFORMATION. THE IMAGE PRIOR TO THE FINAL 'DECODED ONE'.
 
  
-    result = generate_style_transfer(pipe, image, prompt, device)
+    result = generate_style_transfer(pipe, image, prompt, device, strength=0.5, guidance_scale=5, num_inference_steps=25)
     print("Final result saved as 'final_generation.png'")
 
 
