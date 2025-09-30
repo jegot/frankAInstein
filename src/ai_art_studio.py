@@ -1,19 +1,13 @@
-"""
-FrankAInstein - AI Art Magic Studio
-Beautiful Gradio web interface for AI image generation
-"""
-
 # Import our existing modular structure
 from .model import load_models
 from .generate import preprocess_image, encode_image, add_noise_to_image, generate_style_transfer
 import os
 import sys
 
-# Add the src directory to the path so we can import our modules
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# Additional imports needed for the Gradio interface
-from google.colab import files
+
 from PIL import Image
 import torch
 from diffusers import StableDiffusionImg2ImgPipeline, DDIMScheduler
@@ -64,6 +58,11 @@ def process_image_with_story(image, style, strength, guidance_scale, steps, prog
     try:
         # Load models using our existing modular structure
         pipe, vae, device = load_models_once()
+
+        transform = T.Compose([
+            T.Resize((512, 512)),
+            T.ToTensor()
+        ])
 
         # Step 1: GUI output
         progress(0.1, desc="Encoding your image...")
@@ -176,7 +175,7 @@ def process_image_with_story(image, style, strength, guidance_scale, steps, prog
         print(f"Debug - Final latent image size: {result_latent_image.size}")
         print(f"Debug - Comparison image size: {before_after_comparison.size}")
 
-        return reconstructed_image, noisy_img, artist_work_image, result, before_after_comparison, "🎉 AI Magic Complete! Your image has been transformed! 🎨✨"
+        return reconstructed_image, noisy_img, artist_work_image, result, before_after_comparison, "Your image has been transformed! 🎨✨"
 
     except Exception as e:
         return None, None, None, None, None, None, f"❌ Error: {str(e)}"
@@ -184,239 +183,6 @@ def process_image_with_story(image, style, strength, guidance_scale, steps, prog
 
 
 def create_vercel_style_interface():
-    custom_css = """
-    .gradio-container {
-        max-width: 1200px !important;
-        margin: auto !important;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
-    }
-
-    /* Header styling */
-    .main-header {
-        text-align: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 3rem 2rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    }
-
-    .main-header h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin: 0;
-        background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .main-header h2 {
-        font-size: 1.5rem;
-        font-weight: 500;
-        margin: 0.5rem 0;
-        opacity: 0.9;
-    }
-
-    .main-header p {
-        font-size: 1.1rem;
-        opacity: 0.8;
-        margin: 0;
-    }
-
-    /* Card styling */
-    .step-card {
-        background: #ffffff;
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        border: 1px solid #e5e7eb;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transition: all 0.3s ease;
-    }
-
-    .step-card:hover {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        transform: translateY(-2px);
-    }
-
-    /* Primary card styling */
-    .primary-card {
-        border: 2px solid #667eea;
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-    }
-
-    /* Button styling */
-    .generate-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 12px !important;
-        padding: 1rem 2rem !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 14px 0 rgba(102, 126, 234, 0.4) !important;
-    }
-
-    .generate-btn:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 25px 0 rgba(102, 126, 234, 0.6) !important;
-    }
-
-    /* Input styling */
-    .gradio-image {
-        border-radius: 12px !important;
-        border: 2px dashed #d1d5db !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .gradio-image:hover {
-        border-color: #667eea !important;
-        background-color: #f8fafc !important;
-    }
-
-    /* Dropdown styling */
-    .gradio-dropdown {
-        border-radius: 8px !important;
-        border: 1px solid #d1d5db !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .gradio-dropdown:focus {
-        border-color: #667eea !important;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
-    }
-
-    /* Slider styling */
-    .gradio-slider {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-    }
-
-    /* Tab styling */
-    .gradio-tabs {
-        border-radius: 12px !important;
-        overflow: hidden !important;
-    }
-
-    .gradio-tab {
-        background: #f8fafc !important;
-        border: 1px solid #e5e7eb !important;
-        border-radius: 8px 8px 0 0 !important;
-        transition: all 0.3s ease !important;
-    }
-
-    .gradio-tab.selected {
-        background: #667eea !important;
-        color: white !important;
-    }
-
-    /* Story section styling */
-    .story-section {
-        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        margin-top: 2rem;
-        border: 1px solid #81d4fa;
-    }
-
-    /* Character cards */
-    .character-card {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem;
-        text-align: center;
-        border: 1px solid #e5e7eb;
-        transition: all 0.3s ease;
-    }
-
-    .character-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Status text styling */
-    .status-text {
-        background: #f0f9ff;
-        border: 1px solid #0ea5e9;
-        border-radius: 8px;
-        padding: 0.75rem;
-        color: #0369a1;
-        font-weight: 500;
-    }
-
-    /* Fun loading animations */
-    .loading-spinner {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid #f3f3f3;
-        border-top: 3px solid #667eea;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-right: 10px;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .pulse-animation {
-        animation: pulse 1.5s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-        0% { opacity: 1; }
-        50% { opacity: 0.5; }
-        100% { opacity: 1; }
-    }
-
-    .bounce-animation {
-        animation: bounce 1s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-    }
-
-    .shimmer {
-        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-        background-size: 200% 100%;
-        animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-        0% { background-position: -200% 0; }
-        100% { background-position: 200% 0; }
-    }
-
-    /* Fun progress indicators */
-    .progress-dots {
-        display: inline-block;
-    }
-
-    .progress-dots span {
-        display: inline-block;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #667eea;
-        margin: 0 2px;
-        animation: wave 1.4s ease-in-out infinite both;
-    }
-
-    .progress-dots span:nth-child(1) { animation-delay: -0.32s; }
-    .progress-dots span:nth-child(2) { animation-delay: -0.16s; }
-    .progress-dots span:nth-child(3) { animation-delay: 0s; }
-
-    @keyframes wave {
-        0%, 80%, 100% { transform: scale(0); }
-        40% { transform: scale(1); }
-    }
-    """
 
     with gr.Blocks(
         title="FrankAInstein - AI Art Magic Studio",
@@ -425,7 +191,8 @@ def create_vercel_style_interface():
             secondary_hue="purple",
             neutral_hue="slate"
         ),
-        css=custom_css
+        css="../styles/vercel_theme.css"
+
     ) as interface:
 
         # Vercel-style Header
@@ -634,7 +401,6 @@ def create_vercel_style_interface():
     return interface
 
 print("🚀 Starting FrankAInstein - AI Art Magic Studio...")
-print("📱 This will create a beautiful web interface that you can share with your class!")
 
 # Create and launch the interface
 interface = create_vercel_style_interface()
