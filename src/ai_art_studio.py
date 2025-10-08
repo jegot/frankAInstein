@@ -1,3 +1,5 @@
+#THIS FILE IS NO LONGER IN USE. ALL FUNCTIONALITY HAS MOVED TO MAIN APP.PY 
+
 # Import our existing modular structure
 from .model import load_models
 from .generate import preprocess_image, encode_image, add_noise_to_image, generate_style_transfer
