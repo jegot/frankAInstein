@@ -1,0 +1,152 @@
+.gradio-container {
+    background: linear-gradient(135deg, #0a0f0d 0%, #1a2a1f 100%) !important;
+    color: #e8f5e8 !important;
+}
+
+.main-header {
+    background: linear-gradient(135deg, #2d5a27 0%, #1a3816 100%) !important;
+    border: 2px solid #8bc34a !important;
+    box-shadow: 0 0 20px rgba(139, 195, 74, 0.3) !important;
+}
+
+.main-header h1 {
+    background: linear-gradient(135deg, #8bc34a 0%, #4caf50 100%) !important;
+    text-shadow: 0 0 10px rgba(139, 195, 74, 0.5) !important;
+}
+
+
+.main-header h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    opacity: 0.9;
+}
+
+.main-header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+
+.step-card {
+    background: #1e2b1f !important;
+    border: 1px solid #4a6447 !important;
+    border-left: 4px solid #8bc34a !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.primary-card {
+    background: linear-gradient(135deg, #2d4229 0%, #1e2b1f 100%) !important;
+    border: 2px solid #8bc34a !important;
+    box-shadow: 0 0 15px rgba(139, 195, 74, 0.4) !important;
+}
+
+
+.generate-btn {
+    background: linear-gradient(135deg, #4a6447 0%, #8bc34a 100%) !important;
+    border: 2px solid #66bb6a !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    box-shadow: 0 0 20px rgba(139, 195, 74, 0.6) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.generate-btn::before {
+    content: "⚡";
+    position: absolute;
+    right: 15px;
+    animation: spark 2s infinite;
+}
+
+@keyframes spark {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+
+.gradio-image {
+    border: 2px dashed #4a6447 !important;
+    background: #1a2a1f !important;
+}
+
+.gradio-image:hover {
+    border-color: #8bc34a !important;
+    background: #2d4229 !important;
+    box-shadow: 0 0 15px rgba(139, 195, 74, 0.3) !important;
+}
+
+.gradio-dropdown {
+    background: #1a2a1f !important;
+    border: 1px solid #4a6447 !important;
+    color: #e8f5e8 !important;
+}
+
+
+/* Replace generic loading with electric animations */
+.loading-spinner {
+    border: 3px solid #2d4229;
+    border-top: 3px solid #8bc34a;
+    box-shadow: 0 0 10px #8bc34a;
+}
+
+.electric-pulse {
+    animation: electricPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes electricPulse {
+    0%, 100% { 
+        opacity: 1;
+        box-shadow: 0 0 10px #8bc34a;
+    }
+    50% { 
+        opacity: 0.7;
+        box-shadow: 0 0 20px #8bc34a, 0 0 30px #4caf50;
+    }
+}
+
+.gradio-tab {
+    background: #1a2a1f !important;
+    border: 1px solid #4a6447 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.gradio-tab.selected {
+    background: linear-gradient(135deg, #4a6447 0%, #8bc34a 100%) !important;
+    border-color: #66bb6a !important;
+}
+
+.status-text {
+    background: #2d4229 !important;
+    border: 1px solid #8bc34a !important;
+    border-left: 4px solid #8bc34a !important;
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+    font-style: italic !important;
+}
+
+
+    /* ===== GAME-SPECIFIC STYLING ===== */
+#gradio-animation {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+#gradio-animation canvas {
+  border: 2px solid var(--primary-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  transition: all 0.3s ease;
+}
+
+#gradio-animation canvas:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+
+

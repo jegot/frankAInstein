@@ -1,9 +1,9 @@
 import torchvision.transforms as T
 import gradio as gr
 from PIL import Image
-import os
 from src.model import load_models
-from src.generate import preprocess_image, encode_image, add_noise_to_image, generate_style_transfer, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil
+from src.generate import preprocess_image, add_noise_to_image, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil, latent_channel_vis, generate_with_progression, create_denoising_collage
+
 
 # Global variables
 pipe = None
@@ -38,11 +38,22 @@ def load_default_images():
     ]
     DEFAULT_IMAGES = [Image.open(path) for path in asset_paths]
 
+'''
+def load_map_images():
+    """Load static map images"""
+    try:
+        map_paths = [f"assets/map{i}.png" for i in range(7)]
+        return [Image.open(path) for path in map_paths]
+    except Exception as e:
+        print(f"Error loading map images: {e}")
+'''
+
 models_loaded = load_models_at_startup()
 load_default_images()
+#map_images = load_map_images()
 
 
-def process_image_with_story(image, style, strength, guidance_scale, steps, progress=gr.Progress()):
+def process_image_with_story(image, style, strength, guidance_scale, steps=20, progress=gr.Progress()):
     if image is None:
         return None, None, None, None, None, None, None, "Please upload an image first!"
     
@@ -54,33 +65,35 @@ def process_image_with_story(image, style, strength, guidance_scale, steps, prog
         s0_preprocess = preprocess_image(image)
 
         #Encode image - pass through VAE
-        s1_encode = encode_image(vae, s0_preprocess, device)
+        s1_encode = latent_channel_vis(vae, s0_preprocess, device)
 
-        #Add noise ***UPDATE SO THAT AMOUNT OF NOISE IS VARIABLE
-        s2_addnoise = add_noise_to_image(s1_encode)
+        #Initial noise injection - just a single step in SD --noise added will be based on strength chosen by user
+        s2_addnoise = add_noise_to_image(s1_encode, strength)
 
         #***This is where things get out of order. Please note the 's#' prefixes before generated image to understand step
         s0_preprocess = tensor_to_pil(s0_preprocess)
 
         progress(0.5, desc="Artist is creating your new image via diffusion")
         prompt = prompt_conversion(style)
-        s5_result = generate_style_transfer(pipe, s0_preprocess, prompt, device, strength, guidance_scale, steps)
+
+
+        s5_result, denoising_steps = generate_with_progression(pipe, s0_preprocess, prompt, device, strength, guidance_scale, steps)
 
         if check_nsfw_content(s5_result):
                     return *DEFAULT_IMAGES, "Inappropriate content detected. Default images being returned."
 
         #Encoded version of the final image
-        s4_encodef = encode_image(vae, s5_result, device)
+        s4_encodef = latent_channel_vis(vae, s5_result, device)
 
-        #Noise added to the encoded final image to mimic diffusion
-        s3_addnoisef = add_noise_to_image(s4_encodef) 
+        progress(0.8, desc="Finishing up...")
+        s3_denoise = create_denoising_collage(denoising_steps) 
 
         # Final step
         progress(1.0, desc="Almost ready...")
 
         before_after_comparison = create_side_by_side(s0_preprocess, s5_result)
 
-        return s0_preprocess, s1_encode, s2_addnoise, s3_addnoisef, s4_encodef, s5_result, before_after_comparison, "Your image has been transformed!"
+        return s0_preprocess, s1_encode, s2_addnoise, s3_denoise, s4_encodef, s5_result, before_after_comparison, "Your image has been transformed!"
 
     except Exception as e:
         if "out of memory" in str(e).lower():
@@ -88,13 +101,18 @@ def process_image_with_story(image, style, strength, guidance_scale, steps, prog
 
         return None, None, None, None, None, None, None, f"Error: {str(e)}"
 
+def load_raw(filepath):
+    with open(filepath, "r", encoding="utf-8") as f:
+        return f"""{f.read()}"""
+
+css = load_raw("theme2.css")
+
 def create_interface():
     with gr.Blocks(
         title="frank-AI-nstein",
-        theme=gr.themes.Citrus()
+        theme=gr.themes.Soft(), 
+        css = css
     ) as interface:
-
-        # Header
         gr.HTML("""
         <div class="main-header">
             <h1>frank-AI-nstein</h1>
@@ -118,10 +136,9 @@ def create_interface():
                     elem_classes="gradio-dropdown"    
                 )
                 
-                with gr.Accordion("⚙️ Advanced Settings", open=True):
-                    strength = gr.Slider(0.1, 1.0, value=0.5, step=0.1, label="Style Strength", info="How much the model changes your photo")
+                with gr.Accordion("Advanced Settings", open=True):
+                    strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Style Strength", info="How much the model changes your photo & how much noise will injected")
                     guidance_scale = gr.Slider(1.0, 20.0, value=5.0, step=0.5, label="Guidance Scale", info="How closely the model follows the style")
-                    steps = gr.Slider(10, 50, value=25, step=5, label="Generation Steps", info="More steps = higher quality (slower)")
 
                 generate_btn = gr.Button("Start the diffusion process", variant="primary", size="lg")
                 status = gr.Textbox(label="Status", value="Upload an image first!", interactive=False)
@@ -142,8 +159,8 @@ def create_interface():
                         s2_addnoise = gr.Image(label="Noisy Image", height=300, show_download_button=True)
 
                     with gr.Tab("Step 3: Denoising with U-Net", id=3):
-                        gr.Markdown("**Step 3:** The U-Net takes your noisy latent image and begins reconstructing it. It removes noise while preserving structure.")
-                        s3_addnoisef = gr.Image(label="Reconstruction", height=300, show_download_button=True)
+                        gr.Markdown("**Step 3:** The U-Net takes your noisy latent image and begins denoising it.")
+                        s3_denoise = gr.Image(label="Reconstruction", height=300, show_download_button=True)
 
                     with gr.Tab("Step 4: Ready for Decoding!", id=4):
                         gr.Markdown("**Step 4:** Your new image is almost done, but it's still in latent format...")
@@ -162,33 +179,48 @@ def create_interface():
                     prev_btn = gr.Button("⬅️ Previous Step")
                     next_btn = gr.Button("Next Step ➡️")
 
+                #added 'map' section, as the user moves through result tabs above, this section will be as well with static "you are here" imgaes on a map of the diffusion pipeline
+                # Map section with different variable names
+                gr.Markdown("### Pipeline Map")
+                with gr.Tabs() as map_tabs:
+                    for i in range(7):
+                        with gr.Tab(f"Step {i} Map", id=i):
+                            step_names = [
+                                "Original Image", "Latent Encoding", "Noise Injection", 
+                                "Denoising", "Ready for Decoding", "Final Result", "Comparison"
+                            ]
+                            gr.Markdown(f"**You are here:** {step_names[i]}")
+                            gr.Image(value=DEFAULT_IMAGES[i], height=200, show_download_button=False)
 
-        def navigate_tabs(direction):
-            def update_index(current_index):
-                if direction == "next":
-                    new_index = min(current_index + 1, 6)
-                else:  # previous
-                    new_index = max(current_index - 1, 0)
-                return new_index, gr.Tabs(selected=new_index)
-            
-            return update_index
+
+         # Fixed navigation functions
+        def go_prev(current_index):
+            new_index = max(current_index - 1, 0)
+            return new_index, gr.Tabs(selected=new_index), gr.Tabs(selected=new_index)
+
+        def go_next(current_index):
+            new_index = min(current_index + 1, 6)
+            return new_index, gr.Tabs(selected=new_index), gr.Tabs(selected=new_index)
 
         prev_btn.click(
-            fn=lambda idx: (max(idx - 1, 0), gr.Tabs(selected=max(idx - 1, 0))),
+            fn=go_prev,
             inputs=tab_index,
-            outputs=[tab_index, step_tabs]
+            outputs=[tab_index, step_tabs, map_tabs]
         )
         next_btn.click(
-            fn=lambda idx: (min(idx + 1, 6), gr.Tabs(selected=min(idx + 1, 6))),
+            fn=go_next,
             inputs=tab_index,
-            outputs=[tab_index, step_tabs]
+            outputs=[tab_index, step_tabs, map_tabs]
         )
 
         # Connect function
         generate_btn.click(
             fn=process_image_with_story,
-            inputs=[input_image, style, strength, guidance_scale, steps],
-            outputs=[s0_preprocess, s1_encode, s2_addnoise, s3_addnoisef, s4_encodef, s5_result, before_after_comparison, status]
+            inputs=[input_image, style, strength, guidance_scale], #steps now default to 20 w/o user input. reason: speed increase and consistent steps in diffusion
+            outputs=[
+                s0_preprocess, s1_encode, s2_addnoise, s3_denoise, s4_encodef, 
+                s5_result, before_after_comparison, status
+            ]
         )
 
     return interface

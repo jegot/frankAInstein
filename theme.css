@@ -8,12 +8,11 @@
     /* Header styling */
     .main-header {
         text-align: center;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #668f88 0%, #065e14 100%);
         color: white;
         padding: 3rem 2rem;
         border-radius: 16px;
         margin-bottom: 2rem;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
 
     .main-header h1 {
@@ -126,30 +125,6 @@
         color: white !important;
     }
 
-    /* Story section styling */
-    .story-section {
-        background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        margin-top: 2rem;
-        border: 1px solid #81d4fa;
-    }
-
-    /* Character cards */
-    .character-card {
-        background: white;
-        border-radius: 12px;
-        padding: 1rem;
-        text-align: center;
-        border: 1px solid #e5e7eb;
-        transition: all 0.3s ease;
-    }
-
-    .character-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    }
-
     /* Status text styling */
     .status-text {
         background: #f0f9ff;
@@ -231,3 +206,26 @@
         40% { transform: scale(1); }
     }
     
+
+
+    /* ===== GAME-SPECIFIC STYLING ===== */
+#gradio-animation {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+#gradio-animation canvas {
+  border: 2px solid var(--primary-color) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  transition: all 0.3s ease;
+}
+
+#gradio-animation canvas:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+
+

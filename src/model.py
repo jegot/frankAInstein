@@ -16,7 +16,7 @@ def load_models():
             "runwayml/stable-diffusion-v1-5", subfolder="scheduler"
         )
     ).to(device)
-
+    print("models 1/2 loaded")
     pipe.enable_attention_slicing()  # helps reduce memory usage
 
     # Load VAE for latent encoding
@@ -25,5 +25,6 @@ def load_models():
         subfolder="vae",
         torch_dtype=torch_dtype
     ).to(device)
+    print("models 2/2 loaded")
 
     return pipe, device, vae
