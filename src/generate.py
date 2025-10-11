@@ -74,15 +74,15 @@ def create_side_by_side(before_img, after_img):
 
 def prompt_conversion(style):
     style_prompts = {
-        "anime style": "rendered in anime style",
-        "cartoon style": "illustrated in cartoon style",
-        "van gogh style": "in the style of Van Gogh",
-        "watercolor painting": "as a watercolor painting",
-        "pixel art": "in pixel art format",
-        "sketch drawing": "as a pencil sketch",
-        "oil painting": "in oil painting style",
-        "cyberpunk style": "with cyberpunk visual aesthetics",
-        "vintage poster": "as a vintage poster design"
+        "anime style": "anime artwork, vibrant colors, clean line art, highly detailed, studio anime aesthetic",
+        "cartoon style": "cartoon illustration, bold outlines, flat shading, playful and exaggerated features",
+        "van gogh style": "painting in the style of Vincent van Gogh, swirling brush strokes, post-impressionist texture",
+        "watercolor painting": "delicate watercolor painting, soft brush strokes, light washes, flowing pigments",
+        "pixel art": "8-bit pixel art, blocky low-resolution graphics, retro video game aesthetic",
+        "sketch drawing": "pencil sketch drawing, monochrome, cross-hatching, rough hand-drawn lines",
+        "oil painting": "traditional oil painting, rich textures, layered brush strokes, classic fine art style",
+        "cyberpunk style": "cyberpunk artwork, neon lights, futuristic cityscape, high-tech dystopian aesthetic",
+        "vintage poster": "retro vintage poster design, bold typography, muted colors, mid-20th century print style"
     }
     # Default fallback if style not found
     full_prompt = style_prompts.get(style, "stylized rendering")
@@ -224,31 +224,22 @@ def create_denoising_collage(denoising_steps):
     return collage
 
 
-
-
-#maybe??
+#maybe?? not very visually appealing or educational at first glance
 def visualize_prompt_guidance(pipe, prompt, device):
-    """
-    Generates a visual representation of the text embedding for a prompt.
-    """
     # 1. Get the text embeddings from the pipeline's text encoder
     text_input = pipe.tokenizer(prompt, padding="max_length", max_length=pipe.tokenizer.model_max_length, truncation=True, return_tensors="pt")
     with torch.no_grad():
         text_embeddings = pipe.text_encoder(text_input.input_ids.to(device))[0]
 
-    # 2. Normalize and reshape the vector for visualization
     # The output is [1, 77, 768]. We'll visualize the 77x768 tensor.
     embedding_tensor = text_embeddings.squeeze(0) # Shape: [77, 768]
     
     # Normalize the tensor to a 0-1 range to be used as colors
     embedding_tensor = (embedding_tensor - embedding_tensor.min()) / (embedding_tensor.max() - embedding_tensor.min())
 
-    # 3. Convert the tensor to a PIL image
-    # We need to add a channel dimension for grayscale to RGB conversion
-    heatmap_pil = T.ToPILImage()(embedding_tensor.unsqueeze(0).cpu())
-    
-    # 4. Colorize and resize for better visual appeal
-    heatmap_pil = heatmap_pil.resize((384, 150), Image.Resampling.NEAREST) # Resize with sharp pixels
-    heatmap_colored = heatmap_pil.convert("RGB") # Can apply colormaps here if desired
+    heatmap_pil = tensor_to_pil(embedding_tensor)
+    heatmap_pil = heatmap_pil.resize((384, 150), Image.Resampling.NEAREST)
+    return heatmap_pil
 
-    return heatmap_colored
+
+

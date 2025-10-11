@@ -11,6 +11,7 @@ device = None
 vae = None
 
 DEFAULT_IMAGES = None
+MAP_IMAGES = None
 
 def load_models_at_startup():
     """Load models once at startup"""
@@ -38,19 +39,24 @@ def load_default_images():
     ]
     DEFAULT_IMAGES = [Image.open(path) for path in asset_paths]
 
-'''
+
 def load_map_images():
-    """Load static map images"""
-    try:
-        map_paths = [f"assets/map{i}.png" for i in range(7)]
-        return [Image.open(path) for path in map_paths]
-    except Exception as e:
-        print(f"Error loading map images: {e}")
-'''
+    global MAP_IMAGES
+    asset_paths = [
+        "assets/map0.png",
+        "assets/map1.png", 
+        "assets/map2.gif",
+        "assets/map3.gif",
+        "assets/map4.png",
+        "assets/map5.png",
+        "assets/map6.png",
+    ]
+    MAP_IMAGES = [Image.open(path) for path in asset_paths]
+
 
 models_loaded = load_models_at_startup()
 load_default_images()
-#map_images = load_map_images()
+load_map_images()
 
 
 def process_image_with_story(image, style, strength, guidance_scale, steps=20, progress=gr.Progress()):
@@ -62,7 +68,8 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
     
     try:
         #Preprocess 
-        s0_preprocess = preprocess_image(image)
+        prompt = prompt_conversion(style)
+        s0_preprocess = preprocess_image(image) #latent tensor returned
 
         #Encode image - pass through VAE
         s1_encode = latent_channel_vis(vae, s0_preprocess, device)
@@ -70,13 +77,13 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
         #Initial noise injection - just a single step in SD --noise added will be based on strength chosen by user
         s2_addnoise = add_noise_to_image(s1_encode, strength)
 
+        #s2_addnoise = visualize_prompt_guidance(pipe, prompt, device)
+
         #***This is where things get out of order. Please note the 's#' prefixes before generated image to understand step
         s0_preprocess = tensor_to_pil(s0_preprocess)
 
         progress(0.5, desc="Artist is creating your new image via diffusion")
-        prompt = prompt_conversion(style)
-
-
+        
         s5_result, denoising_steps = generate_with_progression(pipe, s0_preprocess, prompt, device, strength, guidance_scale, steps)
 
         if check_nsfw_content(s5_result):
@@ -179,8 +186,7 @@ def create_interface():
                     prev_btn = gr.Button("⬅️ Previous Step")
                     next_btn = gr.Button("Next Step ➡️")
 
-                #added 'map' section, as the user moves through result tabs above, this section will be as well with static "you are here" imgaes on a map of the diffusion pipeline
-                # Map section with different variable names
+                #added 'map' section, as the user moves through result tabs above
                 gr.Markdown("### Pipeline Map")
                 with gr.Tabs() as map_tabs:
                     for i in range(7):
@@ -189,8 +195,7 @@ def create_interface():
                                 "Original Image", "Latent Encoding", "Noise Injection", 
                                 "Denoising", "Ready for Decoding", "Final Result", "Comparison"
                             ]
-                            gr.Markdown(f"**You are here:** {step_names[i]}")
-                            gr.Image(value=DEFAULT_IMAGES[i], height=200, show_download_button=False)
+                            gr.Image(value=MAP_IMAGES[i], height=300, show_download_button=False)
 
 
          # Fixed navigation functions

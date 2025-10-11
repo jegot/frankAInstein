@@ -129,24 +129,6 @@
 }
 
 
-    /* ===== GAME-SPECIFIC STYLING ===== */
-#gradio-animation {
-  margin: 2rem 0;
-  text-align: center;
-}
-
-#gradio-animation canvas {
-  border: 2px solid var(--primary-color) !important;
-  border-radius: var(--radius-md) !important;
-  box-shadow: var(--shadow-md);
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  transition: all 0.3s ease;
-}
-
-#gradio-animation canvas:hover {
-  box-shadow: var(--shadow-lg);
-  transform: translateY(-2px);
-}
 
 
 
