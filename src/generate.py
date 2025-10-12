@@ -75,14 +75,11 @@ def create_side_by_side(before_img, after_img):
 def prompt_conversion(style):
     style_prompts = {
         "anime style": "anime artwork, vibrant colors, clean line art, highly detailed, studio anime aesthetic",
-        "cartoon style": "cartoon illustration, bold outlines, flat shading, playful and exaggerated features",
         "van gogh style": "painting in the style of Vincent van Gogh, swirling brush strokes, post-impressionist texture",
         "watercolor painting": "delicate watercolor painting, soft brush strokes, light washes, flowing pigments",
         "pixel art": "8-bit pixel art, blocky low-resolution graphics, retro video game aesthetic",
-        "sketch drawing": "pencil sketch drawing, monochrome, cross-hatching, rough hand-drawn lines",
-        "oil painting": "traditional oil painting, rich textures, layered brush strokes, classic fine art style",
+        "3D animation": "cinematic 3D animation, in the style of Pixar, appealing characters, detailed textures, sophisticated lighting",
         "cyberpunk style": "cyberpunk artwork, neon lights, futuristic cityscape, high-tech dystopian aesthetic",
-        "vintage poster": "retro vintage poster design, bold typography, muted colors, mid-20th century print style"
     }
     # Default fallback if style not found
     full_prompt = style_prompts.get(style, "stylized rendering")

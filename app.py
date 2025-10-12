@@ -43,12 +43,12 @@ def load_default_images():
 def load_map_images():
     global MAP_IMAGES
     asset_paths = [
-        "assets/map0.png",
-        "assets/map1.png", 
+        "assets/map0.gif",
+        "assets/map1.gif", 
         "assets/map2.gif",
         "assets/map3.gif",
-        "assets/map4.png",
-        "assets/map5.png",
+        "assets/map4.gif",
+        "assets/map5.gif",
         "assets/map6.png",
     ]
     MAP_IMAGES = [Image.open(path) for path in asset_paths]
@@ -136,8 +136,8 @@ def create_interface():
                 input_image = gr.Image(label="Upload Your Photo", type="pil", height=250, show_download_button=False, elem_classes="gradio-image")
 
                 style = gr.Dropdown(
-                    choices=["anime style", "cartoon style", "van gogh style", "watercolor painting", "pixel art", 
-                             "sketch drawing", "oil painting", "cyberpunk style", "vintage poster"], 
+                    choices=["anime style", "van gogh style", "watercolor painting", "pixel art", 
+                             "3D animation", "cyberpunk style"], 
                     value="anime style", 
                     label="Choose Your New Art Style",
                     elem_classes="gradio-dropdown"    
@@ -147,10 +147,12 @@ def create_interface():
                     strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Style Strength", info="How much the model changes your photo & how much noise will injected")
                     guidance_scale = gr.Slider(1.0, 20.0, value=5.0, step=0.5, label="Guidance Scale", info="How closely the model follows the style")
 
-                generate_btn = gr.Button("Start the diffusion process", variant="primary", size="lg")
+                
+                generate_btn = gr.Button("Start the diffusion process", variant="primary", size="lg", elem_classes="generate-btn")
                 status = gr.Textbox(label="Status", value="Upload an image first!", interactive=False)
 
             # Right Panel
+            
             with gr.Column(scale=2):
                 with gr.Tabs() as step_tabs:
                     with gr.Tab("Step 0: Original Image", id=0):
@@ -195,7 +197,7 @@ def create_interface():
                                 "Original Image", "Latent Encoding", "Noise Injection", 
                                 "Denoising", "Ready for Decoding", "Final Result", "Comparison"
                             ]
-                            gr.Image(value=MAP_IMAGES[i], height=300, show_download_button=False)
+                            gr.Image(value=MAP_IMAGES[i], height=300, show_download_button=False, type="pil", format="gif")
 
 
          # Fixed navigation functions
