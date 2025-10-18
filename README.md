@@ -73,20 +73,6 @@ The web interface provides:
 * Before and after image comparison
 * Downloadable results
 
-### Available Styles
-
-The application includes these predefined artistic styles:
-* Anime style
-* Cartoon style
-* Van Gogh style
-* Watercolor painting
-* Pixel art
-* Sketch drawing
-* Oil painting
-* Cyberpunk style
-* Vintage poster
-
-
 
 ## Technical Details
 
@@ -104,7 +90,6 @@ The application includes these predefined artistic styles:
 
 * **Strength**: Controls how much the input image is transformed (0.1 to 1.0)
 * **Guidance Scale**: Influences how closely the AI follows the text prompt (1.0 to 20.0)
-* **Inference Steps**: Number of diffusion steps affecting quality vs speed (10 to 50)
 
 ### Performance Considerations
 
