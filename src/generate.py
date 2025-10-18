@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 import torch
 import torchvision.transforms as T
 import numpy as np
@@ -191,11 +191,14 @@ def generate_with_progression(pipe, image, prompt, device, strength, guidance_sc
     result = pipeline_output.images[0]
 
     denoising_visualizations = [visualize_latent_tensor(latent) for latent in denoising_steps]
+    denoising_visualizations_with_labels = list(zip(denoising_visualizations, capture_steps))
+
 
     if device == "cuda":
         torch.cuda.empty_cache()
     
-    return result, denoising_visualizations
+    return result, denoising_visualizations_with_labels
+
 
 
 
@@ -217,6 +220,59 @@ def create_denoising_collage(denoising_steps):
         if i < len(positions):
             collage.paste(img, positions[i])
             
+    return collage
+
+
+#update from collage
+def create_labeled_denoising_sequence(denoising_steps_with_labels):
+    if not denoising_steps_with_labels:
+        return Image.new('RGB', (384, 240), color='grey')
+
+    # Resize all images to consistent size
+    resized_steps = [(img.resize((192, 192), Image.Resampling.LANCZOS), step_num)
+                     for img, step_num in denoising_steps_with_labels]
+
+    arrow_width = 40
+    image_width = 192
+    image_height = 192
+    label_height = 40
+    total_height = image_height + label_height
+
+    total_width = len(resized_steps) * image_width + (len(resized_steps) - 1) * arrow_width
+    collage = Image.new('RGB', (total_width, total_height), color='black')
+    draw = ImageDraw.Draw(collage)
+
+    # Optional: load a font (fallback to default if unavailable)
+    try:
+        font = ImageFont.truetype("arial.ttf", 20)
+    except:
+        font = ImageFont.load_default()
+
+    for i, (img, step_num) in enumerate(resized_steps):
+        x_offset = i * (image_width + arrow_width)
+        collage.paste(img, (x_offset, 0))
+
+        # Draw label centered below image
+        label_text = f"Step {step_num}"
+        text_bbox = draw.textbbox((0, 0), label_text, font=font)
+        text_width = text_bbox[2] - text_bbox[0]
+        text_height = text_bbox[3] - text_bbox[1]
+        text_x = x_offset + (image_width - text_width) // 2
+        text_y = image_height + (label_height - text_height) // 2
+        draw.text((text_x, text_y), label_text, fill='white', font=font)
+
+        # Draw arrow between images
+        if i < len(resized_steps) - 1:
+            arrow_start = x_offset + image_width
+            arrow_mid_y = image_height // 2
+            arrow_end = arrow_start + arrow_width - 10
+            draw.line([(arrow_start, arrow_mid_y), (arrow_end, arrow_mid_y)], fill='white', width=3)
+            draw.polygon([
+                (arrow_end, arrow_mid_y),
+                (arrow_end - 10, arrow_mid_y - 5),
+                (arrow_end - 10, arrow_mid_y + 5)
+            ], fill='white')
+
     return collage
 
 

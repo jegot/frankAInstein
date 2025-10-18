@@ -2,8 +2,7 @@ import torchvision.transforms as T
 import gradio as gr
 from PIL import Image
 from src.model import load_models
-from src.generate import preprocess_image, add_noise_to_image, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil, latent_channel_vis, generate_with_progression, create_denoising_collage
-
+from src.generate import preprocess_image, add_noise_to_image, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil, latent_channel_vis, generate_with_progression, create_labeled_denoising_sequence
 
 pipe = None
 device = None
@@ -28,13 +27,13 @@ def load_models_at_startup():
 def load_default_images():
     global DEFAULT_IMAGES
     asset_paths = [
-        "assets/s0_cat.png",
-        "assets/s1_cat.png", 
-        "assets/s2_cat.png",
-        "assets/s3_cat.png",
-        "assets/s4_cat.png",
-        "assets/s5_cat.png",
-        "assets/s6_ba_cat.png"
+        "assets/s0_def.png",
+        "assets/s1_def.png", 
+        "assets/s2_def.png",
+        "assets/s3_def.png",
+        "assets/s4_def.png",
+        "assets/s5_def.png",
+        "assets/s6_def.png"
     ]
     DEFAULT_IMAGES = [Image.open(path) for path in asset_paths]
 
@@ -76,9 +75,7 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
         #Initial noise injection - just a single step in SD --noise added will be based on strength chosen by user
         s2_addnoise = add_noise_to_image(s1_encode, strength)
 
-        #s2_addnoise = visualize_prompt_guidance(pipe, prompt, device)
-
-        #***This is where things get out of order. Please note the 's#' prefixes before generated image to understand step
+        #***This is where things get out of order. Please note the 's#' prefixes before generated image to understand steps
         s0_preprocess = tensor_to_pil(s0_preprocess)
 
         progress(0.5, desc="Artist is creating your new image via diffusion")
@@ -92,7 +89,7 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
         s4_encodef = latent_channel_vis(vae, s5_result, device)
 
         progress(0.8, desc="Finishing up...")
-        s3_denoise = create_denoising_collage(denoising_steps) 
+        s3_denoise = create_labeled_denoising_sequence(denoising_steps) 
 
         # Final step
         progress(1.0, desc="Almost ready...")
@@ -116,7 +113,7 @@ css = load_raw("theme2.css")
 def create_interface():
     with gr.Blocks(
         title="frank-AI-nstein",
-        theme=gr.themes.Soft(), 
+        theme='gstaff/xkcd', 
         css = css
     ) as interface:
         gr.HTML("""
@@ -150,41 +147,47 @@ def create_interface():
                 status = gr.Textbox(label="Status", value="Upload an image first!", interactive=False)
 
             # Right Panel
-            
             with gr.Column(scale=2):
                 with gr.Tabs() as step_tabs:
                     with gr.Tab("Step 0: Original Image", id=0):
-                        gr.Markdown("**Step 0:** Your image might look a little different here. It's been slightly cropped and resized to better fit the pipeline.")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 0: Your image might look a little different here. It's been slightly cropped and resized to better fit the pipeline.</p>")
+                        #gr.Markdown("**Step 0:** Your image might look a little different here. It's been slightly cropped and resized to better fit the pipeline.")
                         s0_preprocess = gr.Image(label="Original Image", height=300)
 
                     with gr.Tab("Step 1: Latent Space Encoding", id=1):
-                        gr.Markdown("**Step 1:** Your image now looks like a blurry blob. It's been compressed into 'latent space', a compact representation used by the model.")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 1: Your image has been compressed into latent space, a compact representation used by models to speed things up.</p>")
+                        #gr.Markdown("**Step 1:** Your image now looks like a blurry blob. It's been compressed into 'latent space', a compact representation used by the model.")
                         s1_encode = gr.Image(label="Encoded Latent Space", height=300, show_download_button=True)
 
                     with gr.Tab("Step 2: Noise Injection", id=2):
-                        gr.Markdown("**Step 2:** Random noise is added to the latent representation. This helps the model learn how to reconstruct and stylize your image.")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 2: Random noise has been injected into your image. This helps the model better understand your image.</p>")
+                        #gr.Markdown("**Step 2:** Random noise is added to the latent representation. This helps the model learn how to reconstruct and stylize your image.")
                         s2_addnoise = gr.Image(label="Noisy Image", height=300, show_download_button=True)
 
                     with gr.Tab("Step 3: Denoising with U-Net", id=3):
-                        gr.Markdown("**Step 3:** The U-Net takes your noisy latent image and begins denoising it.")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 3: The U-Net now takes your noisy latent image and begins denoising it in increments. This is the step where the new style is added!</p>")
+                        #gr.Markdown("**Step 3:** The U-Net takes your noisy latent image and begins denoising it.")
                         s3_denoise = gr.Image(label="Reconstruction", height=300, show_download_button=True)
 
                     with gr.Tab("Step 4: Ready for Decoding!", id=4):
-                        gr.Markdown("**Step 4:** Your new image is almost done, but it's still in latent format...")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 4: Your new image is complete...but it's still in latent format and needs to be decoded.</p>")
+                        #gr.Markdown("**Step 4:** Your new image is almost done, but it's still in latent format...")
                         s4_encodef = gr.Image(label="Your New Image", height=300, show_download_button=True)
 
                     with gr.Tab("Step 5: Final Result", id=5):
-                        gr.Markdown("**Step 5:** Here's your AI-generated image, fully reconstructed and stylized based on your original input.")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 5: Here is your final generate image!! It has been reconstructed from your input image and stylized based on your selection.</p>")
+                        #gr.Markdown("**Step 5:** Here's your AI-generated image, fully reconstructed and stylized based on your original input.")
                         s5_result = gr.Image(label="Your New Image", height=300, show_download_button=True)
 
                     with gr.Tab("Step 6: Before & After Comparison", id=6):
-                        gr.Markdown("**Step 5:** See how your original image (left) compares to the AI-generated result (right).")
+                        gr.HTML("<p style='color: #8bc34a; font-weight: bold; margin-bottom: 10px;'>Step 6: See how your original image compares to the generated one. Based on your selected strength and guidance scale, it may look completely different!.</p>")
+                        #gr.Markdown("**Step 6:** See how your original image (left) compares to the AI-generated result (right).")
                         before_after_comparison = gr.Image(label="Before & After Comparison", height=300, show_download_button=True)
 
                 # Navigation Buttons
                 with gr.Row():
-                    prev_btn = gr.Button("⬅️ Previous Step")
-                    next_btn = gr.Button("Next Step ➡️")
+                    prev_btn = gr.Button("<- Previous Step")
+                    next_btn = gr.Button("Next Step ->")
 
                 #added 'map' section, as the user moves through result tabs above
                 gr.Markdown("### Pipeline Map")
@@ -198,7 +201,6 @@ def create_interface():
                             gr.Image(value=MAP_IMAGES[i], height=300, show_download_button=False, type="pil", format="gif")
 
 
-         # Fixed navigation functions
         def go_prev(current_index):
             new_index = max(current_index - 1, 0)
             return new_index, gr.Tabs(selected=new_index), gr.Tabs(selected=new_index)
