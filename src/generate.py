@@ -73,13 +73,12 @@ def create_side_by_side(before_img, after_img):
 
 
 def prompt_conversion(style):
+    #will update post fine-tuning
     style_prompts = {
-        "anime style": "anime artwork, vibrant colors, clean line art, highly detailed, studio anime aesthetic",
-        "van gogh style": "painting in the style of Vincent van Gogh, swirling brush strokes, post-impressionist texture",
-        "watercolor painting": "delicate watercolor painting, soft brush strokes, light washes, flowing pigments",
-        "pixel art": "8-bit pixel art, blocky low-resolution graphics, retro video game aesthetic",
+        "studio ghibli": "anime artwork, whimsical scenery, highly detailed, expressive characters, soft lighting",
+        "LEGO": "blocky plastic textures, modular shapes, toy aesthetic, bright primary colors",
+        "2D animation": "flat cel-shaded illustration, bold outlines, simplified shapes, expressive poses, limited color palette, comic-style clarity, hand-drawn animation aesthetic",
         "3D animation": "cinematic 3D animation, in the style of Pixar, appealing characters, detailed textures, sophisticated lighting",
-        "cyberpunk style": "cyberpunk artwork, neon lights, futuristic cityscape, high-tech dystopian aesthetic",
     }
     # Default fallback if style not found
     full_prompt = style_prompts.get(style, "stylized rendering")
@@ -223,7 +222,7 @@ def create_denoising_collage(denoising_steps):
 
 #maybe?? not very visually appealing or educational at first glance
 def visualize_prompt_guidance(pipe, prompt, device):
-    # 1. Get the text embeddings from the pipeline's text encoder
+
     text_input = pipe.tokenizer(prompt, padding="max_length", max_length=pipe.tokenizer.model_max_length, truncation=True, return_tensors="pt")
     with torch.no_grad():
         text_embeddings = pipe.text_encoder(text_input.input_ids.to(device))[0]

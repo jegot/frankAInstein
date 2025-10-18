@@ -5,7 +5,6 @@ from src.model import load_models
 from src.generate import preprocess_image, add_noise_to_image, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil, latent_channel_vis, generate_with_progression, create_denoising_collage
 
 
-# Global variables
 pipe = None
 device = None
 vae = None
@@ -136,15 +135,14 @@ def create_interface():
                 input_image = gr.Image(label="Upload Your Photo", type="pil", height=250, show_download_button=False, elem_classes="gradio-image")
 
                 style = gr.Dropdown(
-                    choices=["anime style", "van gogh style", "watercolor painting", "pixel art", 
-                             "3D animation", "cyberpunk style"], 
-                    value="anime style", 
+                    choices=["studio ghibli", "LEGO", "2D animation", "3D animation"], 
+                    value="studio ghibli", 
                     label="Choose Your New Art Style",
                     elem_classes="gradio-dropdown"    
                 )
                 
                 with gr.Accordion("Advanced Settings", open=True):
-                    strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Style Strength", info="How much the model changes your photo & how much noise will injected")
+                    strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Noise Injector", info="How much the model changes your photo & how much noise will injected")
                     guidance_scale = gr.Slider(1.0, 20.0, value=5.0, step=0.5, label="Guidance Scale", info="How closely the model follows the style")
 
                 
