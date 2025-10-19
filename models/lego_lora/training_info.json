@@ -1,0 +1,31 @@
+{
+  "style": "lego",
+  "method": "lightweight_lora_finetuning",
+  "training_epochs": 5,
+  "learning_rate": 0.0001,
+  "batch_size": 2,
+  "training_pairs": 50,
+  "final_loss": 0.35501805901527406,
+  "losses": [
+    0.35501805901527406,
+    0.35501805901527406,
+    0.3550180625915527,
+    0.3550180584192276,
+    0.35501805901527406
+  ],
+  "lora_config": {
+    "r": 16,
+    "lora_alpha": 32,
+    "target_modules": [
+      "to_k",
+      "to_q",
+      "to_v",
+      "to_out.0"
+    ],
+    "lora_dropout": 0.1,
+    "bias": "none"
+  },
+  "base_model": "runwayml/stable-diffusion-v1-5",
+  "device": "cuda",
+  "training_time": "12.5 minutes estimated"
+}

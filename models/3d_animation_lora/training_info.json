@@ -1,0 +1,31 @@
+{
+  "style": "3d_animation",
+  "method": "lightweight_lora_finetuning",
+  "training_epochs": 5,
+  "learning_rate": 0.0001,
+  "batch_size": 2,
+  "training_pairs": 50,
+  "final_loss": 0.40811470329761507,
+  "losses": [
+    0.4081146985292435,
+    0.40811469793319705,
+    0.4081146937608719,
+    0.4081146991252899,
+    0.40811470329761507
+  ],
+  "lora_config": {
+    "r": 16,
+    "lora_alpha": 32,
+    "target_modules": [
+      "to_k",
+      "to_q",
+      "to_v",
+      "to_out.0"
+    ],
+    "lora_dropout": 0.1,
+    "bias": "none"
+  },
+  "base_model": "runwayml/stable-diffusion-v1-5",
+  "device": "cuda",
+  "training_time": "12.5 minutes estimated"
+}
