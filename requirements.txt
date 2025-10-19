@@ -7,3 +7,6 @@ Pillow
 numpy
 scikit-learn
 matplotlib
+gradio
+peft
+safetensors

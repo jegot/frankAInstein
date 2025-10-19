@@ -1,0 +1,287 @@
+/* Main container styling */
+.gradio-container {
+    background: linear-gradient(135deg, #0a0f0d 0%, #1a2a1f 100%) !important;
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Header styling */
+.main-header {
+    background: linear-gradient(135deg, #2d5a27 0%, #1a3816 100%) !important;
+    border: 2px solid #8bc34a !important;
+    box-shadow: 0 0 20px rgba(139, 195, 74, 0.3) !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    border-radius: 10px !important;
+}
+
+.main-header h1 {
+    background: linear-gradient(135deg, #8bc34a 0%, #4caf50 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    text-shadow: 0 0 10px rgba(139, 195, 74, 0.5) !important;
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    text-align: center !important;
+    margin: 0 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.main-header h2 {
+    font-size: 1.5rem !important;
+    font-weight: 500 !important;
+    margin: 0.5rem 0 !important;
+    opacity: 0.9 !important;
+    color: #e8f5e8 !important;
+}
+
+.main-header p {
+    font-size: 1.1rem !important;
+    opacity: 0.8 !important;
+    margin: 0.5rem 0 !important;
+    color: #e8f5e8 !important;
+    text-align: center !important;
+}
+
+/* Card styling */
+.step-card {
+    background: #1e2b1f !important;
+    border: 1px solid #4a6447 !important;
+    border-left: 4px solid #8bc34a !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 8px !important;
+    padding: 15px !important;
+    margin: 10px 0 !important;
+}
+
+.primary-card {
+    background: linear-gradient(135deg, #2d4229 0%, #1e2b1f 100%) !important;
+    border: 2px solid #8bc34a !important;
+    box-shadow: 0 0 15px rgba(139, 195, 74, 0.4) !important;
+    border-radius: 10px !important;
+    padding: 20px !important;
+}
+
+/* Button styling */
+.generate-btn {
+    background: linear-gradient(135deg, #4a6447 0%, #8bc34a 100%) !important;
+    border: 2px solid #66bb6a !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    box-shadow: 0 0 20px rgba(139, 195, 74, 0.6) !important;
+    position: relative !important;
+    overflow: hidden !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 15px 30px !important;
+    font-size: 1.1rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.generate-btn:hover {
+    box-shadow: 0 0 30px rgba(139, 195, 74, 0.8) !important;
+    transform: translateY(-2px) !important;
+}
+
+.generate-btn::before {
+    content: "⚡" !important;
+    position: absolute !important;
+    right: 15px !important;
+    animation: spark 2s infinite !important;
+}
+
+@keyframes spark {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Image upload styling */
+.gradio-image {
+    border: 2px dashed #4a6447 !important;
+    background: #1a2a1f !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.gradio-image:hover {
+    border-color: #8bc34a !important;
+    background: #2d4229 !important;
+    box-shadow: 0 0 15px rgba(139, 195, 74, 0.3) !important;
+}
+
+/* Dropdown styling */
+.gradio-dropdown {
+    background: #1a2a1f !important;
+    border: 1px solid #4a6447 !important;
+    color: #e8f5e8 !important;
+    border-radius: 6px !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.gradio-dropdown:focus {
+    border-color: #8bc34a !important;
+    box-shadow: 0 0 10px rgba(139, 195, 74, 0.3) !important;
+}
+
+/* Slider styling */
+.gradio-slider {
+    background: #1a2a1f !important;
+}
+
+.gradio-slider .slider-track {
+    background: #4a6447 !important;
+}
+
+.gradio-slider .slider-fill {
+    background: linear-gradient(135deg, #8bc34a 0%, #4caf50 100%) !important;
+}
+
+/* Tab styling */
+.gradio-tab {
+    background: #1a2a1f !important;
+    border: 1px solid #4a6447 !important;
+    font-family: 'Courier New', monospace !important;
+    color: #e8f5e8 !important;
+    border-radius: 6px 6px 0 0 !important;
+    margin-right: 2px !important;
+}
+
+.gradio-tab.selected {
+    background: linear-gradient(135deg, #4a6447 0%, #8bc34a 100%) !important;
+    border-color: #66bb6a !important;
+    color: #ffffff !important;
+}
+
+.gradio-tab:hover {
+    background: #2d4229 !important;
+    border-color: #8bc34a !important;
+}
+
+/* Status text styling */
+.status-text {
+    background: #2d4229 !important;
+    border: 1px solid #8bc34a !important;
+    border-left: 4px solid #8bc34a !important;
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+    font-style: italic !important;
+    border-radius: 6px !important;
+    padding: 10px !important;
+}
+
+/* Accordion styling */
+.gradio-accordion {
+    background: #1e2b1f !important;
+    border: 1px solid #4a6447 !important;
+    border-radius: 6px !important;
+}
+
+.gradio-accordion .accordion-header {
+    background: #2d4229 !important;
+    color: #e8f5e8 !important;
+    border-bottom: 1px solid #4a6447 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Loading animations */
+.loading-spinner {
+    border: 3px solid #2d4229 !important;
+    border-top: 3px solid #8bc34a !important;
+    box-shadow: 0 0 10px #8bc34a !important;
+}
+
+.electric-pulse {
+    animation: electricPulse 1.5s ease-in-out infinite !important;
+}
+
+@keyframes electricPulse {
+    0%, 100% { 
+        opacity: 1;
+        box-shadow: 0 0 10px #8bc34a;
+    }
+    50% { 
+        opacity: 0.7;
+        box-shadow: 0 0 20px #8bc34a, 0 0 30px #4caf50;
+    }
+}
+
+/* Navigation buttons */
+.gradio-button {
+    background: #2d4229 !important;
+    border: 1px solid #4a6447 !important;
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
+}
+
+.gradio-button:hover {
+    background: #4a6447 !important;
+    border-color: #8bc34a !important;
+    box-shadow: 0 0 10px rgba(139, 195, 74, 0.3) !important;
+}
+
+/* Markdown styling */
+.gradio-markdown {
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.gradio-markdown h1, .gradio-markdown h2, .gradio-markdown h3 {
+    color: #8bc34a !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Input styling */
+.gradio-textbox, .gradio-number {
+    background: #1a2a1f !important;
+    border: 1px solid #4a6447 !important;
+    color: #e8f5e8 !important;
+    border-radius: 6px !important;
+    font-family: 'Courier New', monospace !important;
+}
+
+.gradio-textbox:focus, .gradio-number:focus {
+    border-color: #8bc34a !important;
+    box-shadow: 0 0 10px rgba(139, 195, 74, 0.3) !important;
+}
+
+/* Label styling */
+.gradio-label {
+    color: #e8f5e8 !important;
+    font-family: 'Courier New', monospace !important;
+    font-weight: bold !important;
+}
+
+/* Info text styling */
+.gradio-info {
+    color: #a8c8a8 !important;
+    font-family: 'Courier New', monospace !important;
+    font-size: 0.9rem !important;
+}
+
+/* Global text styling */
+body, .gradio-container * {
+    font-family: 'Courier New', monospace !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a2a1f;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4a6447;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #8bc34a;
+}
