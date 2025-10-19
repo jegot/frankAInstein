@@ -321,4 +321,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - **Stability AI** for Stable Diffusion
 - **Google Colab** for free GPU access
 
+- Link to Google Colab (Fine Tuning Model): https://colab.research.google.com/drive/1GOe9dIUfXwxb-CJhTEbibJwAwDT8QgRV?usp=sharing
+
 *This project demonstrates advanced fine-tuning techniques and production-ready AI application development.*
