@@ -7,11 +7,11 @@ from requests import get
 
 client = InferenceClient(
     provider="fal-ai",
-    api_key="HF_TOKEN",  # replace with real huggingface token
+    api_key="",  # replace with real huggingface token
 )
 
-image_path = r'data\2Danimation-pairs\input'
-output_path = r'data\2Danimation-pairs\output'
+image_path = r'data\00-addl\2danimation-pairs\input'
+output_path = r'data\00-addl\2danimation-pairs\output'
 
 
 image_files = sorted([f for f in os.listdir(image_path) 

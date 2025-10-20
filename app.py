@@ -3,6 +3,7 @@ import gradio as gr
 from PIL import Image
 from src.model import load_models
 from src.generate import preprocess_image, add_noise_to_image, check_nsfw_content, create_side_by_side, prompt_conversion, tensor_to_pil, latent_channel_vis, generate_with_progression, create_labeled_denoising_sequence
+from training.load_finetuned import load_finetuned_model
 
 pipe = None
 device = None
@@ -12,7 +13,8 @@ DEFAULT_IMAGES = None
 MAP_IMAGES = None
 
 def load_models_at_startup():
-    """Load models once at startup"""
+    #Load base model once at startup
+    #different weights (u-net) added per style
     global pipe, device, vae
     try:
         pipe, device, vae = load_models()
@@ -36,7 +38,6 @@ def load_default_images():
         "assets/s6_def.png"
     ]
     DEFAULT_IMAGES = [Image.open(path) for path in asset_paths]
-
 
 def load_map_images():
     global MAP_IMAGES
@@ -65,6 +66,21 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
         return None, None, None, None, None, None, None, "Models not loaded. Please refresh the page."
     
     try:
+        fine_tuned_pipe = pipe
+        lora_name_map = {
+            "studio ghibli": "ghibli",
+            "LEGO": "lego", 
+            "2D animation": "2d_animation",
+            "3D animation": "3d_animation"
+        }
+
+        if style in lora_name_map:
+            fine_tuned_pipe = load_finetuned_model(pipe, lora_name_map[style])
+
+        else:
+            return None, None, None, None, None, None, None, "Error loading weights."
+        
+        
         #Preprocess 
         prompt = prompt_conversion(style)
         s0_preprocess = preprocess_image(image) #latent tensor returned
@@ -80,7 +96,7 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
 
         progress(0.5, desc="Artist is creating your new image via diffusion")
         
-        s5_result, denoising_steps = generate_with_progression(pipe, s0_preprocess, prompt, device, strength, guidance_scale, steps)
+        s5_result, denoising_steps = generate_with_progression(fine_tuned_pipe, s0_preprocess, prompt, device, strength, guidance_scale, steps)
 
         if check_nsfw_content(s5_result):
                     return *DEFAULT_IMAGES, "Inappropriate content detected. Default images being returned."
@@ -140,7 +156,7 @@ def create_interface():
                 
                 with gr.Accordion("Advanced Settings", open=True):
                     strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Noise Injector", info="How much the model changes your photo & how much noise will injected")
-                    guidance_scale = gr.Slider(1.0, 20.0, value=5.0, step=0.5, label="Guidance Scale", info="How closely the model follows the style")
+                    guidance_scale = gr.Slider(10.0, 20.0, value=15.0, step=1.0, label="Guidance Scale", info="How closely the model follows the style")
 
                 
                 generate_btn = gr.Button("Start the diffusion process", variant="primary", size="lg", elem_classes="generate-btn")

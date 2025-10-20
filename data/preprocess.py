@@ -6,8 +6,10 @@ from PIL import Image
  #into 4 subfolder that will be used to create stylized pairs 
  #for training
 
-root_dir = os.path.join('data', 'caltech-101')
-output_size = (256, 256)  # Resize images to this size
+root_dir = os.path.join('data', '00-addl')
+#output_size = (256, 256)  # Resize images to this size
+
+output_size = (512, 512)  # training too low quality on above size. readjusting for additional training pairs
 
 raw_dirs = [
     os.path.join('data', 'raw1'),
@@ -16,26 +18,19 @@ raw_dirs = [
     os.path.join('data', 'raw4')
 ]
 
-def preprocess_and_rename_images(root_dir, output_size):
-    for subfolder in os.listdir(root_dir):
-        subfolder_path = os.path.join(root_dir, subfolder)
-        if os.path.isdir(subfolder_path):
-            print(f"Processing folder: {subfolder}")
-            index = 1
-            for filename in os.listdir(subfolder_path):
-                file_path = os.path.join(subfolder_path, filename)
-                if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
-                    try:
-                        img = Image.open(file_path).convert('RGB')
-                        img = img.resize(output_size)
+def preprocess_images_in_folder(folder_path, output_size):
+    print(f"Processing folder: {folder_path}")
+    for filename in os.listdir(folder_path):
+        file_path = os.path.join(folder_path, filename)
+        if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.bmp', '.gif')):
+            try:
+                img = Image.open(file_path).convert('RGB')
+                img = img.resize(output_size)
 
-                        new_filename = f"{subfolder}{index}.jpg"
-                        new_path = os.path.join(subfolder_path, new_filename)
-                        img.save(new_path)
-
-                        index += 1
-                    except Exception as e:
-                        print(e)
+                new_path = os.path.join(folder_path, filename)
+                img.save(new_path)
+            except Exception as e:
+                print(e)
 
 
 def distribute_images_to_raw_folders(root_dir, raw_dirs):
@@ -57,5 +52,5 @@ def distribute_images_to_raw_folders(root_dir, raw_dirs):
                     print(e)
 
 if __name__ == "__main__":
-    preprocess_and_rename_images(root_dir, output_size)
-    distribute_images_to_raw_folders(root_dir, raw_dirs)
+    preprocess_images_in_folder(root_dir, output_size)
+    #distribute_images_to_raw_folders(root_dir, raw_dirs)

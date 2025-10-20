@@ -1,0 +1,10 @@
+{
+  "style": "lego",
+  "training_pairs": 29,
+  "epochs": 5,
+  "final_loss": 0.13403351800516247,
+  "image_resolution": 512,
+  "lora_rank": 16,
+  "base_model": "runwayml/stable-diffusion-v1-5",
+  "training_complete": true
+}

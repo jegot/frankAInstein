@@ -1,12 +1,22 @@
 Everything in this folder was used to process and generate training pairs for model fine-tuning.
 
+## caltech-101 
 
-## caltech-101
+*** We did begin with this data but the initial training and models used were poor quality. 
+*** Everything related to this dataset has been replaced.
+
 This was the inital dataset downloaded from Kaggle
 Source: https://www.kaggle.com/datasets/imbikramsaha/caltech-101
 
-Dataset was scaled down, leaving only about 4-8 images per object category.
-Innapropriate/poor quality images were deleted. Any object categories that seemed obsolete to the target audience were also deleted entirely.
+
+## additional-pairs-512
+Additional fine-tuning for images of higher quality was added. 59 images were hand-picked based on
+everyday objects, under-represented groups in previous dataset, and additional images that may
+resonate within intended younger audience (toys, crayon drawings). The 59 images were processed as the same
+inputs for each new training pair. An average of ~14 pairs were tossed for low quality generations, leaving
+about 45 pairs per style.
+
+Source: https://unsplash.com/
 
 ## preprocess.py
 Resized (256, 256), renamed, and coverted all images to RBG in the caltech-101 dataset.

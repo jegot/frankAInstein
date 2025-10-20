@@ -75,12 +75,12 @@ def create_side_by_side(before_img, after_img):
 def prompt_conversion(style):
     #will update post fine-tuning
     style_prompts = {
-        "studio ghibli": "anime artwork, whimsical scenery, highly detailed, expressive characters, soft lighting",
-        "LEGO": "blocky plastic textures, modular shapes, toy aesthetic, bright primary colors",
-        "2D animation": "flat cel-shaded illustration, bold outlines, simplified shapes, expressive poses, limited color palette, comic-style clarity, hand-drawn animation aesthetic",
-        "3D animation": "cinematic 3D animation, in the style of Pixar, appealing characters, detailed textures, sophisticated lighting",
+        "studio ghibli": "high quality image in ghibli style, detailed, artistic",
+        "LEGO": "high quality image in lego style, detailed, artistic",
+        "2D animation": "high quality image in 2d_animation style, detailed, artistic",
+        "3D animation": "high quality image in 3d_animation style, detailed, artistic",
     }
-    # Default fallback if style not found
+    
     full_prompt = style_prompts.get(style, "stylized rendering")
     return full_prompt
 

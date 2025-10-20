@@ -1,0 +1,10 @@
+{
+  "style": "3d_animation",
+  "training_pairs": 30,
+  "epochs": 5,
+  "final_loss": 0.08928737429281076,
+  "image_resolution": 512,
+  "lora_rank": 16,
+  "base_model": "runwayml/stable-diffusion-v1-5",
+  "training_complete": true
+}
