@@ -156,7 +156,7 @@ def create_interface():
                 
                 with gr.Accordion("Advanced Settings", open=True):
                     strength = gr.Slider(0.3, 1.0, value=0.6, step=0.1, label="Noise Injector", info="How much the model changes your photo & how much noise will injected")
-                    guidance_scale = gr.Slider(10.0, 20.0, value=15.0, step=1.0, label="Guidance Scale", info="How closely the model follows the style")
+                    guidance_scale = gr.Slider(10.0, 20.0, value=18.0, step=1.0, label="Guidance Scale", info="How closely the model follows the style")
 
                 
                 generate_btn = gr.Button("Start the diffusion process", variant="primary", size="lg", elem_classes="generate-btn")

@@ -18,9 +18,8 @@ This project aims to make AI image generation accessible and understandable to y
 ### Core Components
 
 **Model Management (`src/model.py`)**
-* Loads Stable Diffusion v1.5 pipeline for image generation
-* Manages VAE (Variational Autoencoder) from Stable Diffusion v1.4
-* Handles device detection (CUDA/CPU) and memory optimization
+* Loads Stable Diffusion v1.5 as an overall generative base model
+* VAE (Variational Autoencoder) from Stable Diffusion v1.4 loaded specficially for encoding/decoding visualizations
 * Provides efficient model loading with one-time initialization
 
 **Image Processing (`src/generate.py`)**
@@ -37,7 +36,7 @@ This project aims to make AI image generation accessible and understandable to y
 ### Prerequisites
 
 * Python 3.8 or higher
-* CUDA-compatible GPU (recommended for optimal performance)
+* CUDA-compatible GPU is ideal, but running on CPU is managable. 
 * 8GB+ RAM (16GB recommended)
 
 ### Setup Instructions
@@ -86,17 +85,15 @@ The web interface provides:
   * Manages latent space encoding and decoding
   * Enables visualization of compressed image representations
 
-### Key Parameters
+* **Stylized LoRA Weights**: `training/models-update/`
+  * Low-rank adaptation (LoRA) is a way to add small changes to an existing model
+  * We trained 4 separate LoRAs on 4 distinct styles for optimal image generation. 
 
-* **Strength**: Controls how much the input image is transformed (0.1 to 1.0)
-* **Guidance Scale**: Influences how closely the AI follows the text prompt (1.0 to 20.0)
+### Training LoRAs
 
-### Performance Considerations
-
-* **GPU Acceleration**: CUDA support for faster processing
-* **Memory Management**: Efficient model loading and caching
-* **Batch Processing**: Optimized for single image processing
-* **Error Handling**: Robust error management for educational environments
+* In-depth READMEs for training and datasets have been made for your convenience. Please find them below:
+  * TRAINING : 
+  * DATASETS :
 
 ## Project Structure
 
@@ -136,7 +133,7 @@ Students will understand:
 ## Safety Features
 
 * **Content Filtering**: Automatic detection and regeneration of inappropriate content
-* **Predefined Styles**: Limited style options to prevent misuse
+* **Predefined Styles**: Limited style options to prevent misuse, no direct prompt access
 
 ## Troubleshooting
 
@@ -157,12 +154,6 @@ Students will understand:
 * Check Python path configuration
 * Verify virtual environment activation
 
-### Performance Optimization
-
-* Use GPU acceleration when available
-* Process images in batches for multiple transformations
-* Monitor system resources during processing
-* Consider using smaller models for faster processing
 
 ## License
 

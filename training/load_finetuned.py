@@ -11,6 +11,7 @@ import json
 from diffusers import StableDiffusionImg2ImgPipeline, DDIMScheduler
 from peft import PeftModel
 import traceback
+import copy
 
 # Global cache for loaded fine-tuned models to avoid reloading
 finetuned_models_cache = {}
@@ -90,9 +91,12 @@ def load_finetuned_model(base_pipe, style_name, models_dir="training/models"):
             safety_checker=base_pipe.safety_checker,
             feature_extractor=base_pipe.feature_extractor
         )
+
+        #ADDED: create copy of UNet for simple weight swapping
+        unet_copy = copy.deepcopy(base_pipe.unet)
         
         # Load LoRA weights into the UNet using PEFT library
-        lora_model = PeftModel.from_pretrained(finetuned_pipe.unet, lora_path)
+        lora_model = PeftModel.from_pretrained(unet_copy, lora_path)
         
         # Merge LoRA weights into the base UNet and unload the PeftModel wrapper
         # This creates a single UNet with the LoRA weights permanently integrated
