@@ -1,0 +1,11 @@
+{
+  "style": "2d_animation",
+  "training_pairs": 30,
+  "epochs": 3,
+  "final_loss": 0.08541887706766525,
+  "best_loss": 0.07449169990917047,
+  "image_resolution": 512,
+  "lora_rank": 16,
+  "base_model": "runwayml/stable-diffusion-v1-5",
+  "training_complete": true
+}
