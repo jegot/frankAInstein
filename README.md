@@ -93,8 +93,8 @@ The web interface provides:
 ### Training
 
 * In-depth READMEs for training and datasets have been made for your convenience. Please find them below:
-  * TRAINING : training/README.md
-  * DATASETS : data/README.md
+  * Model training, LoRA information: training/README.md
+  * Datasets used, preprocessing, pair generation: data/README.md
 
 ## Project Structure
 
@@ -112,22 +112,23 @@ frankAInstein/
 │   └── model.py            # base model/vae loading and management
 ├── training/
 │   ├── models/                    # initial LoRA-based models
-│          ├── 2d_animation_lora/
-│          │        ├──adapter_config.json        # adapter info 
-│          │        ├──adapter_model.safetensor   # stored model
-│          │        └──training_info.json         #training info
-│          │
-│          ├── 3d_animation_lora/     # follows same folder structure as above
-│          ├── ghibli_lora/           # ""
-│          └── lego_lora/             # ""
+│   │      ├── 2d_animation_lora/
+│   │      │        ├──adapter_config.json        # adapter info 
+│   │      │        ├──adapter_model.safetensor   # stored model
+│   │      │        └──training_info.json         #training info
+│   │      │
+│   │      ├── 3d_animation_lora/     # follows same folder structure as above
+│   │      ├── ghibli_lora/           # ""
+│   │      └── lego_lora/             # ""
 │   ├── models-update/             # same structure as models/ but with improved continued learning
 │   ├── load_finetuned.py          # loading specific model based on style
-│   └── README.md                 # more information on training
+│   ├── README.md                  # more information specific to model training and finetuning
+│   └── notebooks/                 # contains Jupyter notebooks used for training in Colab
 │
-├── app.py                # main entry point
+├── app.py                  # main entry point
 ├── theme2.css              # GUI styling
 ├── projectNotes.md         # Development notes and story
-└── README.md              # This documentation
+└── README.md               # This documentation
 ```
 
 ## Dependencies
@@ -176,8 +177,23 @@ Users will understand:
 * Verify virtual environment activation
 
 
-## Use of Generative AI Notice
-* Deepseek was used for coding assitance and generation
+## Use of Generative AI Disclaimer
+
+**Deepseek** 
+Used for coding assitance and generation in the following files:
+* data/generate_training_pairs.py
+* data/preprocess.py
+* src/generate.py
+* app.py
+* training/notebooks/continued_training.ipynb
+
+**Gemini**
+Used for coding assitance and generation in the following files:
+* src/ai_art_studio.py
+* src/model.py
+* training/load_finetuned.py
+* theme2.css
+* training/notebooks/training.ipynb
 
 ## License
 

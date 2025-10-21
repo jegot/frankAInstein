@@ -8,17 +8,24 @@
 Initial training and LoRA-based model generation:
 
 * Colab notebook used for training: https://colab.research.google.com/drive/1GOe9dIUfXwxb-CJhTEbibJwAwDT8QgRV?usp=sharing
+* local copy also at training/notebooks/training.ipynb
 
-* Dataset used: data/datasets/initial-caltech101-dataset
-* ghibli: Final loss = 0.2533
-* lego: Final loss = 0.3550
-* 2d_animation: Final loss = 0.4898
-* 3d_animation: Final loss = 0.4081
+* Training info
+    - Dataset used: data/datasets/initial-caltech101-dataset
+    - 50 input/output pairs per model
+    - Learning rate: 1e-4 || Epochs: 5
+    - ghibli: Final loss = 0.2533
+    - lego: Final loss = 0.3550
+    - 2d_animation: Final loss = 0.4898
+    - 3d_animation: Final loss = 0.4081
 
 
 Continued training for quality adjustments:
 
-* First round
+* Colab notebook used for both: https://colab.research.google.com/drive/1q2HZ-sIHGwUAhJfp_zyw_2GcbxP4T5DD
+* local copy also available at training/notebooks/continued-training.ipynb
+
+* First round info
     - Dataset used: data/datasets/additional-dataset
     - 45~ input/output pairs per model
     - Learning rate: 5e-5 || Epochs: 5
@@ -35,5 +42,3 @@ Continued training for quality adjustments:
     - lego: Final loss = 0.0834 (ran @ 3 epochs and lr=1e-5)
     - 2d_animation: Final loss = 0.0854 (ran @ 3 epochs and lr=1e-5)
     - 3d_animation: Final loss = 0.0893 (ran @ 5 epochs and lr=5e-5)
-
-* Colab notebook used for both: https://colab.research.google.com/drive/1q2HZ-sIHGwUAhJfp_zyw_2GcbxP4T5DD
