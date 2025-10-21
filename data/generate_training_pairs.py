@@ -10,15 +10,16 @@ client = InferenceClient(
     api_key="",  # replace with real huggingface token
 )
 
-image_path = r'data\00-addl\2danimation-pairs\input'
-output_path = r'data\00-addl\2danimation-pairs\output'
-
+image_path = r'data\additional-additional-dataset\2danimation-pairs\input'
+output_path = r'data\additional-additional-datase\2danimation-pairs\output'
 
 image_files = sorted([f for f in os.listdir(image_path) 
                      if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.bmp'))])
 
 print(f"Found {len(image_files)} images to process")
 
+
+# takes a folder and uses HuggingFace Inference Client to generate new output in target style
 def process_image_with_inference(input_image_path, output_path, subject):
     
     # Skip if output already exists

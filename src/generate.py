@@ -29,31 +29,6 @@ def add_noise_to_image(image, strength):
     return Image.fromarray(noisy_array)
 
 
-
-def generate_style_transfer(pipe, image, prompt, device, strength, guidance_scale, num_inference_steps):
-    """Generate style transfer using the diffusion pipeline"""
-    # Only enable VAE slicing for memory savings (works on both CPU/GPU)
-    if not hasattr(pipe, '_vae_slicing_enabled') or not pipe._vae_slicing_enabled:
-        pipe.vae.enable_slicing()
-        pipe._vae_slicing_enabled = True
-    
-    result = pipe(
-        prompt=prompt,
-        image=image,
-        strength=strength,
-        guidance_scale=guidance_scale,
-        num_inference_steps=num_inference_steps,
-        generator=torch.Generator(device=device).manual_seed(42),
-        output_type="pil" 
-    ).images[0]
-
-    # Cleanup
-    if device == "cuda":
-        torch.cuda.empty_cache()
-    
-    return result
-
-
 def check_nsfw_content(image):
     #Check if image is all black (NSFW filter triggered)
     img_array = np.array(image)
@@ -73,7 +48,7 @@ def create_side_by_side(before_img, after_img):
 
 
 def prompt_conversion(style):
-    #will update post fine-tuning
+    #prompts match the prompts given during LoRA fine-tuning.
     style_prompts = {
         "studio ghibli": "high quality image in ghibli style, detailed, artistic",
         "LEGO": "high quality image in lego style, detailed, artistic",
@@ -102,8 +77,12 @@ def get_latent_tensor(vae, image, device):
     return latent_tensor  # Returns [1, 4, 48, 48] tensor
 
 
+"""
+    Converts a latent tensor to a channel overlay.
+    Each channel is assigned a distinct color.
+    Returns image.
+"""
 def visualize_latent_tensor(latent_tensor):
-    """Convert a latent tensor to a channel overlay visualization"""
     latent = latent_tensor[0]  # Remove batch dimension [4, 48, 48]
 
     # Get the actual dimensions of the latent tensor
@@ -136,7 +115,6 @@ def visualize_latent_tensor(latent_tensor):
     # Normalize final composite to prevent over-saturation
     composite = composite.clamp(0, 1)
     
-    # Convert to PIL Image
     overlay_image = T.ToPILImage()(composite.cpu())
     
     output_size=(192, 192)
@@ -150,18 +128,19 @@ def latent_channel_vis(vae, image, device):
     return visualize_latent_tensor(latent_tensor)
 
 
+"""
+    Runs the image-to-image generation pipeline with intermediate latent capture.
+    Computes actual denoising steps based on user-selected parameters to select steps to visualize.
+    Returns final image along with visualizations of selected latent states for denoising generation.
+"""
 def generate_with_progression(pipe, image, prompt, device, strength, guidance_scale, num_inference_steps):
     # Calculate the actual number of steps that will be run by the pipeline.
     actual_num_steps = int(num_inference_steps * strength)
-    if actual_num_steps < 1:
-        # If strength is so low that no steps are run, return an error or default.
-        # For this app, returning the original image and empty steps is safest.
-        print("Strength is too low, resulting in zero steps. Skipping generation.")
-        return image, []
-
     denoising_steps = []
+
     # Dynamically determine how many images to capture.
     num_to_capture = min(4, actual_num_steps)
+
     # Base the capture points on the actual number of steps.
     capture_steps = np.linspace(0, actual_num_steps - 1, num_to_capture, dtype=int).tolist()
     print(f"Actual steps to run: {actual_num_steps}. Capturing latents at steps: {capture_steps}")
@@ -193,42 +172,21 @@ def generate_with_progression(pipe, image, prompt, device, strength, guidance_sc
     denoising_visualizations = [visualize_latent_tensor(latent) for latent in denoising_steps]
     denoising_visualizations_with_labels = list(zip(denoising_visualizations, capture_steps))
 
-
     if device == "cuda":
         torch.cuda.empty_cache()
     
     return result, denoising_visualizations_with_labels
 
 
-
-
-def create_denoising_collage(denoising_steps):
-    if not denoising_steps:
-        # Return a blank image if the list is empty for any reason
-        return Image.new('RGB', (384, 384), color = 'grey')
-
-    # Resize all to same size for consistent grid
-    resized_steps = [step.resize((192, 192), Image.Resampling.LANCZOS) for step in denoising_steps]
-    
-    # Create 2x2 grid
-    collage = Image.new('RGB', (384, 384), color = 'black')
-    
-    positions = [(0, 0), (192, 0), (0, 192), (192, 192)]
-    
-    # Safely paste each available image into its slot
-    for i, img in enumerate(resized_steps):
-        if i < len(positions):
-            collage.paste(img, positions[i])
-            
-    return collage
-
-
-#update from collage
+"""
+    Creates an image to show user denoising steps
+    Output will look as such, with 1, 3, 6,and 11 representing steps: 
+    [1] -> [3] -> [6] -> [11]
+"""
 def create_labeled_denoising_sequence(denoising_steps_with_labels):
     if not denoising_steps_with_labels:
         return Image.new('RGB', (384, 240), color='grey')
 
-    # Resize all images to consistent size
     resized_steps = [(img.resize((192, 192), Image.Resampling.LANCZOS), step_num)
                      for img, step_num in denoising_steps_with_labels]
 
@@ -242,7 +200,6 @@ def create_labeled_denoising_sequence(denoising_steps_with_labels):
     collage = Image.new('RGB', (total_width, total_height), color='black')
     draw = ImageDraw.Draw(collage)
 
-    # Optional: load a font (fallback to default if unavailable)
     try:
         font = ImageFont.truetype("arial.ttf", 20)
     except:

@@ -2,13 +2,8 @@ import os
 import shutil
 from PIL import Image
  
- #this file just splits up caltech-101 dataset (from Kaggle)
- #into 4 subfolder that will be used to create stylized pairs 
- #for training
-
-root_dir = os.path.join('data', '00-addl')
+root_dir = os.path.join('data', 'additional-additional-dataset')
 #output_size = (256, 256)  # Resize images to this size
-
 output_size = (512, 512)  # training too low quality on above size. readjusting for additional training pairs
 
 raw_dirs = [
@@ -18,6 +13,7 @@ raw_dirs = [
     os.path.join('data', 'raw4')
 ]
 
+# resizes images and converts to RGB
 def preprocess_images_in_folder(folder_path, output_size):
     print(f"Processing folder: {folder_path}")
     for filename in os.listdir(folder_path):
@@ -32,7 +28,7 @@ def preprocess_images_in_folder(folder_path, output_size):
             except Exception as e:
                 print(e)
 
-
+# used for larger, inital caltech-101 dataset, distributed input images across 4 style pair folders.
 def distribute_images_to_raw_folders(root_dir, raw_dirs):
     for subfolder in os.listdir(root_dir):
         subfolder_path = os.path.join(root_dir, subfolder)

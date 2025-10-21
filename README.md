@@ -4,7 +4,7 @@ An educational AI image generation application that demonstrates how Stable Diff
 
 ## Overview
 
-frankAInstein is a comprehensive educational tool that breaks down the complex process of AI image generation into understandable, visual steps. The application uses Stable Diffusion models to transform user images into different artistic styles while providing real-time visualization of each step in the process.
+frankAInstein is a comprehensive educational tool that breaks down the complex process of AI image generation into understandable, visual steps. The application uses Stable Diffusion combined with fine-tuned LoRA adapters to transform user images into different styles while providing real-time visualization of each step in the process.
 
 ## Educational Purpose
 
@@ -85,26 +85,47 @@ The web interface provides:
   * Manages latent space encoding and decoding
   * Enables visualization of compressed image representations
 
-* **Stylized LoRA Weights**: `training/models-update/`
+* **Stylized LoRA Weights**: `training/models-update/(style)_lora/...`
   * Low-rank adaptation (LoRA) is a way to add small changes to an existing model
-  * We trained 4 separate LoRAs on 4 distinct styles for optimal image generation. 
+  * We trained 4 separate LoRAs on 4 distinct styles for optimal image generation
+  * Information for each LoRA can be found in the JSON files in their respective folders 
 
-### Training LoRAs
+### Training
 
 * In-depth READMEs for training and datasets have been made for your convenience. Please find them below:
-  * TRAINING : 
-  * DATASETS :
+  * TRAINING : training/README.md
+  * DATASETS : data/README.md
 
 ## Project Structure
 
 ```
 frankAInstein/
-├── app.py                  #Main app entry point with Gradio
+├── assets/                 # folder containing image assets application
+├── data/
+│   ├── datasets/           # folder containing the 3 datasets used for training
+│   ├── generate_training_pairs.py    # output data generation for training
+│   ├── preprocess.py                 # input data preprocessing
+│   └── README.md                     # more information on datasets (sources, generations, etc)
 ├── src/
 │   ├── ai_art_studio.py    # (ARCHIVED - All functions moved to app.py)
-│   ├── generate.py         # Image processing functions
-│   └── model.py            # Model loading and management
-├── requirements.txt        # Python dependencies
+│   ├── generate.py         # image and pipeline processing functions
+│   └── model.py            # base model/vae loading and management
+├── training/
+│   ├── models/                    # initial LoRA-based models
+│          ├── 2d_animation_lora/
+│          │        ├──adapter_config.json        # adapter info 
+│          │        ├──adapter_model.safetensor   # stored model
+│          │        └──training_info.json         #training info
+│          │
+│          ├── 3d_animation_lora/     # follows same folder structure as above
+│          ├── ghibli_lora/           # ""
+│          └── lego_lora/             # ""
+│   ├── models-update/             # same structure as models/ but with improved continued learning
+│   ├── load_finetuned.py          # loading specific model based on style
+│   └── README.md                 # more information on training
+│
+├── app.py                # main entry point
+├── theme2.css              # GUI styling
 ├── projectNotes.md         # Development notes and story
 └── README.md              # This documentation
 ```
@@ -125,14 +146,14 @@ frankAInstein/
 
 ### Learning Objectives
 
-Students will understand:
-* How AI models process visual information
+Users will understand:
+* How diffusion models process visual information
 * The concept of latent space
-* The role of noise in diffusion models
+* The role of noise and denoising in diffusion models
 
 ## Safety Features
 
-* **Content Filtering**: Automatic detection and regeneration of inappropriate content
+* **Content Filtering**: Automatic detection of inappropriate content, default images returned instead
 * **Predefined Styles**: Limited style options to prevent misuse, no direct prompt access
 
 ## Troubleshooting
@@ -155,13 +176,12 @@ Students will understand:
 * Verify virtual environment activation
 
 
+## Use of Generative AI Notice
+* Deepseek was used for coding assitance and generation
+
 ## License
 
 This project is designed for educational purposes. Please ensure compliance with model licenses and usage terms when deploying in educational environments.
 
-## Acknowledgments
-
-* **Hugging Face**: For providing the Stable Diffusion models and diffusers library
-* **Gradio**: For the excellent web interface framework
 
 This project represents a commitment to making AI education accessible, engaging, and safe for learners of all ages.

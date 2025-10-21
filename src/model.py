@@ -7,7 +7,7 @@ def load_models():
     device = "cuda" if torch.cuda.is_available() else "cpu"
     torch_dtype = torch.float16 if device == "cuda" else torch.float32
 
-    # Load Stable Diffusion pipeline
+    # Load base Stable Diffusion pipeline
     pipe = StableDiffusionImg2ImgPipeline.from_pretrained(
         "runwayml/stable-diffusion-v1-5",
         torch_dtype=torch_dtype,

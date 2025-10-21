@@ -13,8 +13,8 @@ DEFAULT_IMAGES = None
 MAP_IMAGES = None
 
 def load_models_at_startup():
-    #Load base model once at startup
-    #different weights (u-net) added per style
+    #Load base models once at startup
+    #different weights (u-net) will be added per style
     global pipe, device, vae
     try:
         pipe, device, vae = load_models()
@@ -105,6 +105,8 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
         s4_encodef = latent_channel_vis(vae, s5_result, device)
 
         progress(0.8, desc="Finishing up...")
+
+        # creates image with 4 visualized denoising steps.
         s3_denoise = create_labeled_denoising_sequence(denoising_steps) 
 
         # Final step
@@ -117,7 +119,6 @@ def process_image_with_story(image, style, strength, guidance_scale, steps=20, p
     except Exception as e:
         if "out of memory" in str(e).lower():
             return *DEFAULT_IMAGES, "Not enough memory to generate image. Default images being returned."
-
         return None, None, None, None, None, None, None, f"Error: {str(e)}"
 
 def load_raw(filepath):
@@ -126,6 +127,7 @@ def load_raw(filepath):
 
 css = load_raw("theme2.css")
 
+# Gradio GUI
 def create_interface():
     with gr.Blocks(
         title="frank-AI-nstein",
