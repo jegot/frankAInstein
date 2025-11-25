@@ -168,6 +168,12 @@ def generate_with_progression(pipe, image, prompt, device, strength, guidance_sc
         safety_checker=None
     )
     result = pipeline_output.images[0]
+    
+    # Add invisible watermark for accountability and traceability
+    # This ensures AI-generated content can be identified even after manipulation
+    # Increased strength to 0.2 for better robustness against attacks
+    from src.watermark import add_watermark_to_image
+    result = add_watermark_to_image(result, watermark_text="AI_GENERATED_FRANKAINSTEIN", strength=0.2)
 
     denoising_visualizations = [visualize_latent_tensor(latent) for latent in denoising_steps]
     denoising_visualizations_with_labels = list(zip(denoising_visualizations, capture_steps))

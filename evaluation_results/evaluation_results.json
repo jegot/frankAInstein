@@ -1,0 +1,2038 @@
+{
+  "timestamp": "2025-11-25T11:50:17.497707",
+  "watermark_text": "AI_GENERATED_FRANKAINSTEIN",
+  "statistics": {
+    "overall_success_rate": 0.9647058823529412,
+    "by_attack_type": {
+      "noise": {
+        "success_rate": 1.0,
+        "total_tests": 30,
+        "successful": 30,
+        "average_confidence": 0.8986979166666667
+      },
+      "blur": {
+        "success_rate": 1.0,
+        "total_tests": 30,
+        "successful": 30,
+        "average_confidence": 0.9015625
+      },
+      "resize": {
+        "success_rate": 1.0,
+        "total_tests": 30,
+        "successful": 30,
+        "average_confidence": 0.9138020833333333
+      },
+      "combined": {
+        "success_rate": 1.0,
+        "total_tests": 10,
+        "successful": 10,
+        "average_confidence": 0.50625
+      },
+      "jpeg": {
+        "success_rate": 1.0,
+        "total_tests": 40,
+        "successful": 40,
+        "average_confidence": 0.9138671875
+      },
+      "crop": {
+        "success_rate": 0.8,
+        "total_tests": 30,
+        "successful": 24,
+        "average_confidence": 0.48802083333333335
+      }
+    },
+    "average_confidence": 0.8098805147058824
+  },
+  "detailed_results": [
+    {
+      "image_index": 0,
+      "style": "custom_0",
+      "original_detection": {
+        "detected": true,
+        "confidence": 1.0
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.5625,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.4921875,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.46875,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.9765625,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.9765625,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.5546875,
+          "success": true,
+          "image_index": 0,
+          "style": "custom_0"
+        }
+      ]
+    },
+    {
+      "image_index": 1,
+      "style": "custom_1",
+      "original_detection": {
+        "detected": true,
+        "confidence": 1.0
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.46875,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": false,
+          "confidence": 0.4375,
+          "success": false,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.515625,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.953125,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.5078125,
+          "success": true,
+          "image_index": 1,
+          "style": "custom_1"
+        }
+      ]
+    },
+    {
+      "image_index": 2,
+      "style": "custom_2",
+      "original_detection": {
+        "detected": true,
+        "confidence": 0.828125
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.453125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.578125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": false,
+          "confidence": 0.4140625,
+          "success": false,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 0.8125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.7890625,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.796875,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 0.828125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 0.828125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 0.828125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 0.8359375,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 0.8203125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 0.8203125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 0.8203125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 0.8046875,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.8125,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.765625,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.5234375,
+          "success": true,
+          "image_index": 2,
+          "style": "custom_2"
+        }
+      ]
+    },
+    {
+      "image_index": 3,
+      "style": "custom_3",
+      "original_detection": {
+        "detected": true,
+        "confidence": 0.9921875
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.484375,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": false,
+          "confidence": 0.421875,
+          "success": false,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.5078125,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.984375,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.4765625,
+          "success": true,
+          "image_index": 3,
+          "style": "custom_3"
+        }
+      ]
+    },
+    {
+      "image_index": 4,
+      "style": "custom_4",
+      "original_detection": {
+        "detected": true,
+        "confidence": 1.0
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.515625,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.515625,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": false,
+          "confidence": 0.4453125,
+          "success": false,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.984375,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.5546875,
+          "success": true,
+          "image_index": 4,
+          "style": "custom_4"
+        }
+      ]
+    },
+    {
+      "image_index": 5,
+      "style": "custom_5",
+      "original_detection": {
+        "detected": true,
+        "confidence": 0.640625
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.4609375,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.515625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.4921875,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 0.640625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.6171875,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.6171875,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 0.640625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 0.6484375,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 0.640625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 0.65625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 0.6484375,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 0.6484375,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 0.6484375,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 0.640625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.6328125,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.625,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.46875,
+          "success": true,
+          "image_index": 5,
+          "style": "custom_5"
+        }
+      ]
+    },
+    {
+      "image_index": 6,
+      "style": "custom_6",
+      "original_detection": {
+        "detected": true,
+        "confidence": 0.9765625
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.484375,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.546875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": false,
+          "confidence": 0.3671875,
+          "success": false,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.9375,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.9296875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 0.9765625,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 0.9765625,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 0.9765625,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.953125,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.9296875,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.4765625,
+          "success": true,
+          "image_index": 6,
+          "style": "custom_6"
+        }
+      ]
+    },
+    {
+      "image_index": 7,
+      "style": "custom_7",
+      "original_detection": {
+        "detected": true,
+        "confidence": 0.703125
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.53125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.5078125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.5859375,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 0.6875,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 0.6796875,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 0.6484375,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 0.703125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 0.703125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 0.6875,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 0.6953125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 0.7109375,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 0.703125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 0.7109375,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 0.6953125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.6953125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.7109375,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.53125,
+          "success": true,
+          "image_index": 7,
+          "style": "custom_7"
+        }
+      ]
+    },
+    {
+      "image_index": 8,
+      "style": "custom_8",
+      "original_detection": {
+        "detected": true,
+        "confidence": 1.0
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": false,
+          "confidence": 0.4375,
+          "success": false,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.5,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.46875,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.9921875,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.4765625,
+          "success": true,
+          "image_index": 8,
+          "style": "custom_8"
+        }
+      ]
+    },
+    {
+      "image_index": 9,
+      "style": "custom_9",
+      "original_detection": {
+        "detected": true,
+        "confidence": 1.0
+      },
+      "attack_results": [
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.05
+          },
+          "detected": true,
+          "confidence": 0.5,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.1
+          },
+          "detected": true,
+          "confidence": 0.453125,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "crop",
+          "attack_params": {
+            "crop_ratio": 0.2
+          },
+          "detected": true,
+          "confidence": 0.5078125,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 3
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "blur",
+          "attack_params": {
+            "kernel_size": 7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 95
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 85
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 75
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "jpeg",
+          "attack_params": {
+            "quality": 65
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.9
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.8
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "resize",
+          "attack_params": {
+            "scale": 0.7
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 5
+          },
+          "detected": true,
+          "confidence": 1.0,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 10
+          },
+          "detected": true,
+          "confidence": 0.96875,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "noise",
+          "attack_params": {
+            "noise_level": 15
+          },
+          "detected": true,
+          "confidence": 0.90625,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        },
+        {
+          "attack_name": "combined",
+          "attack_params": {
+            "crop_ratio": 0.05,
+            "blur_kernel": 3,
+            "jpeg_quality": 85
+          },
+          "detected": true,
+          "confidence": 0.4921875,
+          "success": true,
+          "image_index": 9,
+          "style": "custom_9"
+        }
+      ]
+    }
+  ]
+}
