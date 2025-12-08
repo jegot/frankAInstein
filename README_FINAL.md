@@ -242,17 +242,14 @@ frankAInstein/
    ```bash
    pip install -r requirements.txt
    ```
-2. **Launch the educational UI (optional)**
-   ```bash
-   python app.py
    ```
-3. **Evaluate trustworthiness**
+2. **Evaluate trustworthiness**
    ```bash
    python evaluate_trustworthiness.py
    ```
    * Uses `images_trustworthiness/` if present.
    * Otherwise generates 10 stylized reference images automatically.
-4. **Inspect results**
+3. **Inspect results**
    * `evaluation_results/evaluation_results.json`
    * `evaluation_results/evaluation_summary.png`
 
